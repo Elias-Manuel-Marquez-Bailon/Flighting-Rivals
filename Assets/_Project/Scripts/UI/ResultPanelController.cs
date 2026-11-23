@@ -4,12 +4,23 @@ using UnityEngine.UI;
 
 namespace FightingRivals.UI
 {
+    // Pantalla de resultado (Ganaste / Perdiste / Empate) con Reintentar y Menú principal.
+    // RoundManager decide el resultado y llama a ShowVictory, ShowDefeat o ShowDraw.
     public class ResultPanelController : MonoBehaviour
     {
         public GameManager gameManager;
         public GameObject resultPanel;
-        public GameObject debugPanel;
         public Text resultText;
+
+        private bool resultShown;
+
+        private void Awake()
+        {
+            if (resultPanel != null)
+            {
+                resultPanel.SetActive(false);
+            }
+        }
 
         public void ShowVictory()
         {
@@ -19,6 +30,11 @@ namespace FightingRivals.UI
         public void ShowDefeat()
         {
             ShowResult("PERDISTE");
+        }
+
+        public void ShowDraw()
+        {
+            ShowResult("EMPATE");
         }
 
         public void Retry()
@@ -33,14 +49,17 @@ namespace FightingRivals.UI
 
         private void ShowResult(string message)
         {
+            // El resultado solo se muestra una vez por pelea.
+            if (resultShown)
+            {
+                return;
+            }
+
+            resultShown = true;
+
             if (resultText != null)
             {
                 resultText.text = message;
-            }
-
-            if (debugPanel != null)
-            {
-                debugPanel.SetActive(false);
             }
 
             if (resultPanel != null)
