@@ -1,7 +1,7 @@
 # Fighting Rivals --- Documento maestro del proyecto
 
-**Versión:** 0.3\
-**Estado:** Fase 1 completada; esqueleto navegable sin combate\
+**Versión:** 0.4\
+**Estado:** Fases 2 a 6 completadas; prototipo jugable contra CPU (sin Android)\
 **Motor:** Unity 6000.6.0f1 con URP 2D e Input System 1.20.0\
 **Plataformas objetivo:** Windows y Android\
 **Género:** Juego de lucha 2D, 1 contra 1\
@@ -20,44 +20,48 @@ Está escrito para que una persona desarrolladora o una IA de
 programación pueda comprender el contexto sin depender de conversaciones
 anteriores.
 
-**El proyecto ya tiene un esqueleto navegable, pero el combate todavía
-no está implementado.** Las mecánicas, personajes y arena deben crearse
-y validarse a partir de la Fase 2. La sección 1.1 registra el estado real
-al cerrar la Fase 1.
+**El proyecto ya tiene una pelea jugable contra la CPU** con arte y
+audio provisionales. Lo siguiente es la Fase 7 (Android y controles
+táctiles). La sección 1.1 registra el estado real del proyecto.
 
 La prioridad actual es conseguir un **prototipo pequeño, estable y
 divertido**: abrir el juego, entrar a una pelea contra la computadora,
 ganar o perder y poder reintentar. No se debe intentar completar el
 Arcade entero antes de comprobar que el combate funciona.
 
-### 1.1 Estado actual del proyecto (Fase 1 cerrada)
+### 1.1 Estado actual del proyecto (Fases 2 a 6 cerradas)
 
 Verificado directamente en el proyecto local:
 
 -   Unity **6000.6.0f1** con **URP 2D** e **Input System 1.20.0**
     activo (`activeInputHandler: 1`).
--   Estructura propia creada en `Assets/_Project/` (escenas, scripts,
-    editor, prefabs, arte, audio, datos y settings).
--   Escenas **`MainMenu.unity`** y **`FightScene.unity`** creadas y
-    añadidas a Build Settings. `SampleScene.unity` ya no forma parte de
-    la build.
--   Scripts de Fase 1: `GameManager`, `MainMenuController` y
-    `ResultPanelController`, en `Assets/_Project/Scripts/`.
--   Herramientas de editor: `Phase1SceneBuilder` (regenera el esqueleto)
-    y `Phase1Validator` (comprueba escenas, referencias y botones).
--   Menú principal con **Jugar**, **Opciones** y **Créditos**; Opciones y
-    Créditos son paneles dentro de `MainMenu`.
--   **Jugar** carga `FightScene`, que muestra un simulador temporal con
-    botones **Ganaste** / **Perdiste** y un `ResultPanel` con
-    **Reintentar** y **Menú principal**.
--   Validación automática en batch: `PHASE1_VALIDATION_OK` (Build
-    Settings, componentes, Canvas 1920×1080, cámara ortográfica, fuentes,
-    referencias y botones conectados).
--   **Pendiente de prueba manual:** recorrer el flujo en Play mode y
-    revisar la legibilidad visual en la ventana Game.
--   **No existe todavía** movimiento, arena jugable, combate, CPU, vida,
-    temporizador ni audio.
--   **Pendiente inmediato:** Fase 2 (arena y movimiento del jugador).
+-   Flujo completo: menú → `FightScene` → "¡PELEA!" → combate contra la
+    CPU → K.O. o fin del tiempo → **Ganaste / Perdiste / Empate** →
+    Reintentar o Menú principal.
+-   Movimiento horizontal, salto, giro automático hacia el rival, límites
+    de arena y separación entre luchadores.
+-   Ataque ligero y pesado con fases de inicio/activo/recuperación,
+    hitbox que golpea una sola vez por ataque, hitstun y empuje.
+-   Bloqueo con botón dedicado (frontal, sin chip damage).
+-   CPU con acercamiento, ataques con pausa, bloqueo probabilístico y
+    retroceso sin salirse de la arena.
+-   HUD con barras de vida, temporizador de 60 s y mensajes; pausa (Esc o
+    botón) con Continuar / Reintentar / Menú principal.
+-   Opciones con volumen de música y efectos guardado en `PlayerPrefs`.
+    `AudioManager` y `FighterAudio` están listos, pero **todavía no hay
+    clips de audio asignados**.
+-   Valores configurables en ScriptableObjects (`Assets/_Project/Data/`).
+-   Arte **provisional** (rectángulos de color); el sprite, el Animator y
+    los sonidos se asignan en los prefabs y datos sin tocar código (ver
+    `README.md`).
+-   Herramientas de editor: `GameSceneBuilder` (construye escenas, prefabs
+    y datos) y `GameSceneValidator` (`SCENE_VALIDATION_OK`). Sustituyen a
+    `Phase1SceneBuilder` / `Phase1Validator`.
+-   **Pendiente de prueba manual:** recorrer `Docs/TEST_PLAN.md` en Play
+    mode con teclado.
+-   **No existe todavía:** controles táctiles, build Android, build
+    Windows probada, dash, arte y audio definitivos.
+-   **Pendiente inmediato:** Fase 7 (Android y controles táctiles).
 
 > Nota: la carpeta del repositorio se llama `Flighting Rivals` por un
 > error tipográfico heredado. El nombre oficial del juego es
@@ -214,9 +218,8 @@ scripts:
 -   El round termina si la vida llega a cero o si el tiempo llega a
     cero.
 -   Si se agota el tiempo, gana quien tenga más vida.
--   Si ambos tienen la misma vida al agotarse el tiempo, declarar empate
-    y aplicar una regla sencilla definida por el equipo; evitar que el
-    combate se quede bloqueado.
+-   Si ambos tienen la misma vida al agotarse el tiempo, se declara
+    **empate** (pantalla "EMPATE" con Reintentar / Menú principal).
 -   Si ambos llegan a cero de vida casi al mismo tiempo (doble KO),
     declarar empate y detener el combate. No reiniciar automáticamente.
 -   Para el prototipo se juega **un solo round** (decisión cerrada en
@@ -914,7 +917,7 @@ verificó en batch durante la Fase 1.
 menú. La comprobación visual en Play mode queda como prueba manual
 pendiente.
 
-### Fase 2 --- Arena y movimiento del jugador
+### Fase 2 --- Arena y movimiento del jugador (completada)
 
 -   Crear una arena con suelo y límites.
 -   Instanciar el jugador con un sprite provisional.
@@ -924,7 +927,7 @@ pendiente.
 
 **Salida:** el personaje se controla de forma estable.
 
-### Fase 3 --- Primer ataque y daño
+### Fase 3 --- Primer ataque y daño (completada)
 
 -   Crear un ataque ligero.
 -   Configurar la hitbox y su ventana activa.
@@ -934,7 +937,7 @@ pendiente.
 
 **Salida:** un golpe conecta, causa daño y produce feedback.
 
-### Fase 4 --- Segundo luchador y CPU básica
+### Fase 4 --- Segundo luchador y CPU básica (completada)
 
 -   Añadir el rival CPU.
 -   Reutilizar los componentes comunes del luchador.
@@ -944,7 +947,7 @@ pendiente.
 
 **Salida:** el jugador puede pelear contra una CPU funcional.
 
-### Fase 5 --- Reglas y resultado
+### Fase 5 --- Reglas y resultado (completada)
 
 -   Añadir ataque pesado.
 -   Añadir bloqueo.
@@ -956,7 +959,7 @@ pendiente.
 
 **Salida:** una pelea completa se puede ganar, perder y reiniciar.
 
-### Fase 6 --- Pausa, audio y pulido mínimo
+### Fase 6 --- Pausa, audio y pulido mínimo (completada en código; faltan clips de audio y animaciones reales)
 
 -   Implementar pausa y reanudación.
 -   Añadir música y efectos.
@@ -1167,7 +1170,7 @@ impedir que se empiece con sprites provisionales:
 -   Paquete de sprites temporal.
 -   Diseño definitivo del sexto personaje y su nombre.
 -   Valores finales de daño, velocidad, recuperación y vida.
--   Si se incluye el dash en el prototipo.
+-   Si se incluye el dash en el prototipo (no implementado todavía).
 -   Si el arte final será pixel art, ilustración 2D de alta resolución o
     rig 2D, y su escala.
 -   Licencias y atribuciones definitivas de música, efectos, fuentes y
@@ -1193,6 +1196,26 @@ desarrolla el Arcade.
 de ampliar.**
 
 ## 25. Registro de cambios
+
+### Versión 0.4 --- Fases 2 a 6
+
+-   Arena provisional (salón de clases con rectángulos), suelo y límites
+    (`ArenaBounds`).
+-   Luchador compartido entre jugador y CPU: `FighterController`,
+    `FighterAttack`, `FighterVisual`, `Health`, `AttackHitbox`,
+    `FighterAudio`; solo cambia la fuente de órdenes
+    (`PlayerInputHandler` o `CPUController`).
+-   Daño centralizado en `CombatResolver`; bloqueo frontal sin chip damage.
+-   `RoundManager`, `CombatHUD`, `HealthBarUI`, `PauseMenuController`,
+    `OptionsController`, `AudioManager`; `ResultPanelController` con
+    empate y sin simulador temporal.
+-   Controles en `Settings/FightingRivalsControls.inputactions` (teclado y
+    control).
+-   Datos en ScriptableObjects (`Data/Characters`, `Data/Combat`,
+    `RoundSettings`, `CPUSettings`).
+-   `Phase1SceneBuilder` / `Phase1Validator` renombrados y ampliados a
+    `GameSceneBuilder` / `GameSceneValidator`.
+-   Regla de empate por tiempo cerrada: empate.
 
 ### Versión 0.3 --- Fase 1
 

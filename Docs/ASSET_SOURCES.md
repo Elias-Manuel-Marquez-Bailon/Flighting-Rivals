@@ -34,11 +34,16 @@ Uso en el juego:
 Cambios realizados:
 ```
 
-## Recursos integrados de Unity
+## Recursos integrados y generados
 
-La UI de la Fase 1 usa componentes de `com.unity.ugui`, la fuente
-integrada `LegacyRuntime.ttf` y los sprites por defecto de Unity UI. No
-son recursos externos ni requieren atribución adicional.
+La UI usa componentes de `com.unity.ugui`, la fuente integrada
+`LegacyRuntime.ttf` y los sprites por defecto de Unity UI (incluidos los
+sliders de Opciones). No son recursos externos ni requieren atribución.
+
+`Assets/_Project/Art/Placeholders/Square.png` es un cuadrado blanco de
+16×16 generado por `GameSceneBuilder`. Se colorea para los luchadores y el
+escenario provisionales; no es un recurso externo y se reemplazará por el
+arte definitivo.
 
 ## Recursos de plantilla de Unity
 
