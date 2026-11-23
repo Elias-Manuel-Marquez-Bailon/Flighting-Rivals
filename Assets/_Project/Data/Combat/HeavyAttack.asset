@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55e4a5cb1b5e9460b3897e7178805f3, type: 3}
+  m_Name: HeavyAttack
+  m_EditorClassIdentifier: Assembly-CSharp::FightingRivals.Data.AttackData
+  attackName: Ataque pesado
+  damage: 120
+  startup: 0.22
+  active: 0.12
+  recovery: 0.4
+  hitboxOffset: {x: 1, y: 0.2}
+  hitboxSize: {x: 1.2, y: 0.6}
+  hitstun: 0.5
+  blockstun: 0.25
+  knockback: 6
+  swingSound: {fileID: 0}
+  hitSound: {fileID: 0}
