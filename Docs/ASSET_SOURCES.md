@@ -46,3 +46,16 @@ Los archivos de `Assets/Welcome/`, `Assets/Settings/` y
 `Assets/Scenes/SampleScene.unity` provienen de la plantilla 2D (URP) de
 Unity. No forman parte del contenido del juego; `SampleScene` ya está
 fuera de Build Settings y el resto se sustituirá durante el desarrollo.
+
+## Sprites de personajes (PixelLab)
+
+``` text
+Nombre: Sprites de Leo (12 animaciones + proyectil «Onda Acústica»)
+Autor: Generados por el equipo con PixelLab (plan de pago)
+URL de origen: https://pixellab.ai
+Licencia: Términos de servicio de PixelLab (https://pixellab.ai/termsofservice); uso propio con suscripción activa
+¿Requiere atribución?: No
+Fecha de descarga: 27/11/2026
+Uso en el juego: Assets/_Project/Art/Characters/Leo/
+Cambios realizados: Saturación +15 % (PIL); importados como Sprite, filtro Point, sin compresión
+```
