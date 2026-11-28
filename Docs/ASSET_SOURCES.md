@@ -81,3 +81,14 @@ Fecha de descarga: 27/11/2026
 Uso en el juego: Assets/_Project/Art/Characters/Elias/
 Cambios realizados: Selección de frames, efectos no deseados eliminados con script, «Recibir golpe» armado con pose de Gemini, blanco del ojo retocado a mano en «Caminar», saturación +15 %; importados como Sprite, filtro Point, sin compresión
 ```
+
+``` text
+Nombre: Sprites de Oscar (13 animaciones + piezas de biomasa)
+Autor: Generados por el equipo: poses clave con Gemini (convertidas a pixel art con script) y animaciones con PixelLab (plan de pago)
+URL de origen: https://pixellab.ai · https://gemini.google.com
+Licencia: Términos de servicio de PixelLab y de Google Gemini; uso propio
+¿Requiere atribución?: No
+Fecha de descarga: 27/11/2026
+Uso en el juego: Assets/_Project/Art/Characters/Oscar/
+Cambios realizados: Selección de frames, efectos no deseados eliminados con script, «Recibir golpe» armado con pose de Gemini, antebrazos del bloqueo recoloreados a biomasa, piel y tenis del super recoloreados a los tonos de la pose base, piezas del tentáculo (Biomasa/) recortadas del látigo, saturación +15 %; importados como Sprite, filtro Point, sin compresión
+```
